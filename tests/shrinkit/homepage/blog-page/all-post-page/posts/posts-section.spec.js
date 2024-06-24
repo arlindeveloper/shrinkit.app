@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Post Section Suite', () => {
 
-    test.only('verify that all the navigation bar elements are working properly', async ({ page }) => {
+    test.skip('verify that all the navigation bar elements are working properly', async ({ page }) => {
 
         //top nav bar logo is visible & clickable
         await expect(page.getByRole('navigation').getByRole('link', { name: 'Effortless Video Compression' })).toBeVisible();
@@ -81,50 +81,76 @@ test.describe('Post Section Suite', () => {
     })
 
     test('verify that post section has a "Back to Blog" link button', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('link', { name: 'Back to Blog' })).toBeVisible();
     })
 
     test('verify that link button has the text: "Back to Blog"', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('main')).toContainText('Back to Blog');
     })
 
     test('verify that the "Back to Blog" link button takes you to the "Blog" page', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await page.getByRole('link', { name: 'Back to Blog' }).click();
+        await expect(page.getByRole('heading', { name: 'Welcome to ShrinkIt Blog' })).toBeVisible();
+        await expect(page.locator('h1')).toContainText('Welcome to ShrinkIt Blog');
     })
 
     test('verify that the post section has any of these categoies: "Announcements/Features/Tutorials/Releases/Guides"', async ({ page }) => {
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('link', { name: 'Guides' })).toBeVisible();
 
     })
 
     test('verify that the post section has valid date', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByText('May 1,')).toBeVisible();
+        await expect(page.getByRole('article')).toContainText('May 1, 2024');
     })
 
     test('verify that the post section has a title', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('heading', { name: 'How to Convert Videos for' })).toBeVisible();
+        await expect(page.locator('h1')).toContainText('How to Convert Videos for Twitter to Maximize Engagement');
     })
 
     test('verify that the post section has a descriptive subtitle', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByText('Learn how to optimize and')).toBeVisible();
+        await expect(page.getByRole('article')).toContainText('Learn how to optimize and convert videos for Twitter to enhance visibility and boost engagement with specific steps and recommended tools.');
     })
 
     test('verify that the post section has a static image', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('img', { name: 'Convert videos for Twitter' })).toBeVisible();
     })
 
     test('verify that the post section has the "Posted by" phrase', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByText('Posted by')).toBeVisible();
+        await expect(page.getByRole('article')).toContainText('Posted by');
     })
 
     test('verify that the post section shows the "Author" avatar picture', async ({ page }) => {
-
+        //TODO: incomplete
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByRole('link', { name: 'Avatar of Eddie Espinal Eddie' })).toBeVisible();
+        await expect(page.getByRole('article')).toContainText('Eddie Espinal');
     })
 
     test('verify that the post has a section called: "Related reading"', async ({ page }) => {
-
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+        await expect(page.getByText('Related reading')).toBeVisible();
+        await expect(page.getByRole('article')).toContainText('Related reading');
     })
 
     test('verify that the post has a "Try Shrinkit!" download button that takes you to the app store', async ({ page }) => {
+        await page.getByRole('link', { name: 'How to Convert Videos for' }).first().click();
+await expect(page.getByRole('link', { name: 'Mac App Store logo' })).toBeVisible();
+        const page1Promise = page.waitForEvent('popup');
+        await page.getByRole('link', { name: 'Mac App Store logo' }).click();
+        const page1 = await page1Promise;
 
     })
 
